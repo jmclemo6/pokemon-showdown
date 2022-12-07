@@ -11,9 +11,11 @@ describe('Multiscale', function () {
 	});
 
 	it('should halve damage when it is at full health', function () {
-		battle = common.createBattle();
-		battle.setPlayer('p1', {team: [{species: "Dragonite", ability: 'multiscale', moves: ['splash']}]});
-		battle.setPlayer('p2', {team: [{species: "Gyarados", ability: 'moxie', moves: ['incinerate']}]});
+		battle = common.createBattle([[
+			{species: "Dragonite", ability: 'multiscale', moves: ['splash']},
+		], [
+			{species: "Gyarados", ability: 'moxie', moves: ['incinerate']},
+		]]);
 		const pokemon = battle.p1.active[0];
 		battle.makeChoices('move splash', 'move incinerate');
 		const damage = pokemon.maxhp - pokemon.hp;
@@ -24,9 +26,11 @@ describe('Multiscale', function () {
 	});
 
 	it('should be suppressed by Mold Breaker', function () {
-		battle = common.createBattle();
-		battle.setPlayer('p1', {team: [{species: "Dragonite", ability: 'multiscale', moves: ['splash']}]});
-		battle.setPlayer('p2', {team: [{species: "Gyarados", ability: 'moldbreaker', moves: ['incinerate']}]});
+		battle = common.createBattle([[
+			{species: "Dragonite", ability: 'multiscale', moves: ['splash']},
+		], [
+			{species: "Gyarados", ability: 'moldbreaker', moves: ['incinerate']},
+		]]);
 		const pokemon = battle.p1.active[0];
 		battle.makeChoices('move splash', 'move incinerate');
 		const damage = pokemon.maxhp - pokemon.hp;
